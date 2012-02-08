@@ -12,6 +12,10 @@ gem 'cucumber-rails'
 gem 'webrat'
 gem 'database_cleaner'
 gem 'hpricot'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'thin'
+gem 'heroku'
 
 group :development, :test do
 	gem 'sqlite3'
