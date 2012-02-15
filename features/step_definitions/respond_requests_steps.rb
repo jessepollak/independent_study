@@ -1,17 +1,16 @@
-Given /^no pending requests$/ do
-  Request.find(:all).should be_nil
+Given /^the home page$/ do
+  visit requests_path
 end
 
-When /^I visit the home page$/ do
-  visit requests_path
+When /^there are no pending requests$/ do
+  Request.find(:all).should be_nil
 end
 
 Then /^a flash message displays "([^']*)"$/ do |arg1|
   response.should have_selector(".flash", :content => arg1)
 end
 
-Given /^one or more pending requests$/ do
-  visit requests_path
+When /^there are one or more pending requests$/ do
   @request1 = Request.create!(:title => "Bicycle", :date => Time.now + 5.days, :description => "Give me your bike!", :posted_by => "Harry Potter")
   @request2 = Request.create!(:title => "Frisbee", :date => Time.now + 8.days, :description => "Wanna Frisbee", :posted_by => "Herman Cain")
 end
@@ -23,10 +22,6 @@ end
 Given /^the show page of a request$/ do
   @request1 = Request.create!(:title => "Bicycle", :date => Time.now + 5.days, :description => "Give me your bike!", :posted_by => "Harry Potter")
   visit request_path(@request1)
-end
-
-When /^I submit a form with valid information$/ do
-  pending # express the regexp above with the code you wish you had
 end
 
 When /^the message sends successfully$/ do
@@ -41,15 +36,10 @@ When /^the message does not send successfully$/ do
   pending # express the regexp above with the code you wish you had
 end
 
-When /^I submit a form with invalid information$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
 When /^I do not select a request$/ do
-  pending
 end
 
-Then /^nothing happens$/ do
+Then /^I am on the requests page$/ do
   response.should have_selector("title", :content => "Pending Requests")
 end
 
@@ -57,7 +47,7 @@ When /^I select a request$/ do
   click_link request_path(@request)
 end
 
-Then /^I am returned to show page of the request$/ do
+Then /^I am returned to the show page of the request$/ do
   response.should have_selector("title", :content => @request1.title)
 end
 
