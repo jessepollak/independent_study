@@ -9,6 +9,7 @@ Feature: Post a request
     
   Scenario: I submit a valid request for a specific date
     Given I am a logged in user
+    And I am on the new request page
     When I fill in "title" with "Bicycle"
     And I fill in "Description" with "I really need to borrow a bicycle for next weekend"
     And I select "1 hour" for the "duration"
@@ -19,16 +20,18 @@ Feature: Post a request
     
   Scenario: I submit a blank title
     Given I am a logged in user
+    And I am on the new request page
     When I fill in "title" with ""
     And I fill in "Description" with "I really need to borrow a bicycle for next weekend"
     And I select "1 hour" for the "duration"
     And I give "February 1st, 2012" for the date
     And I click the "Submit request" button
     Then I am returned to the form
-    And a notice is displayed saying the title was blank
+    And a flash message displays "Please submit a valid title."
     
   Scenario: I submit a blank description
     Given I am a logged in user
+    And I am on the new request page
     When I fill in "title" with "Bicycle"
     And I fill in "Description" with ""
     And I select "1 hour" for the "duration"
