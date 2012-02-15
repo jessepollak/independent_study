@@ -12,7 +12,3 @@ end
 Then /^I am returned to the home page$/ do
   response.should have_selector(:title, "Pending Requests")
 end
-
-Then /^I am taken to the failure page$/ do
-  pending # express the regexp above with the code you wish you had
-end
