@@ -18,6 +18,10 @@ When /^I click the "([^']*)" button$/ do |arg1|
   click_button arg1
 end
 
+When /^I click the "([^']*)" link$/ do |arg1|
+  click_link arg1
+end
+
 When /^I submit a valid request$/ do
 	When 'I fill in "Title" with "Bicycle"'
 	When 'I fill in "Description" with "Give me your bike!"'
