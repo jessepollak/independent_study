@@ -1,8 +1,4 @@
-Given /^the home page$/ do
-  visit requests_path
-end
-
-When /^there are no pending requests$/ do
+Given /^there are no pending requests$/ do
   Request.find(:all).should be_nil
 end
 
@@ -10,7 +6,7 @@ Then /^a flash message displays "([^']*)"$/ do |arg1|
   response.should have_selector(".flash", :content => arg1)
 end
 
-When /^there are one or more pending requests$/ do
+Given /^there are one or more pending requests$/ do
   @request1 = Request.create!(:title => "Bicycle", :date => Time.now + 5.days, :description => "Give me your bike!", :posted_by => "Harry Potter")
   @request2 = Request.create!(:title => "Frisbee", :date => Time.now + 8.days, :description => "Wanna Frisbee", :posted_by => "Herman Cain")
 end
