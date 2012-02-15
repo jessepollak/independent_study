@@ -1,5 +1,5 @@
 Given /^I am a logged in user$/ do
-  visit_page "/auth/facebook"
+  visit "/auth/facebook"
 end
 
 Then /^I am taken to the show page for that request$/ do
