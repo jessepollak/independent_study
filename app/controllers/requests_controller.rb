@@ -82,7 +82,7 @@ class RequestsController < ApplicationController
   end
 
   def search
-    query = params[:query].split.map {|term| "%#{term}%"}
+    query = params[:search].split.map {|term| "%#{term}%"}
     sql = "title LIKE ? OR description LIKE ?"
     @results = Request.where([sql, *query])
   end
