@@ -46,9 +46,39 @@ describe Request do
   	Request.create(@attributes).should be_valid
   end
 
-  it "should not allow a request that is not unique" do
-  	Request.create!(@attributes)
+  it "should not allow a request with a name and title pair that is not unique" do
+  	Request.create(@attributes)
   	Request.create(@attributes).should_not be_valid
+  end
+
+  describe "search requests" do
+
+    it "should return all results if user searches empty string" do
+      Request.create(@attributes)
+      @attributes[:title] = "Tricycle"
+      Request.create(@attributes)
+      result = Request.search("")
+      result.count.should == 2
+    end
+
+    it "should return no results if user searches 'abekDikEOwks'" do
+      Request.create(@attributes)
+      result = Request.search("abekDikEOwks")
+      result.count.should == 0
+    end
+
+    it "should return one result if user searches 'bicycle'" do
+      Request.create(@attributes)
+      result = Request.search("bicycle")
+      result.count.should == 1
+    end
+
+    it "should return one result if user searches 'give me'" do
+      Request.create(@attributes)
+      result = Request.search("give me")
+      result.count.should == 1
+    end
+
   end
 
 end
