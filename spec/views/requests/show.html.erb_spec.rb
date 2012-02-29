@@ -3,16 +3,16 @@ require 'spec_helper'
 describe "requests/show" do
   before(:each) do
     @request = assign(:request, stub_model(Request,
-      :title => "Title",
-      :description => "MyText"
+      :title => "Request 1",
+      :description => "This is a description of request 1"
     ))
   end
 
   it "renders attributes in <p>" do
     render
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/Title/)
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/MyText/)
+    rendered.should have_selector(".show_request") do
+      rendered.should have_selector(".title", content: @request.title)
+      rendered.should have_selector(".description")
+    end
   end
 end

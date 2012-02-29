@@ -20,7 +20,7 @@ describe "users/new" do
       assert_select "input#user_fb_id", :name => "user[fb_id]"
       assert_select "input#user_email", :name => "user[email]"
       assert_select "input#user_number", :name => "user[number]"
-      assert_select "input#user_college", :name => "user[college]"
+      assert_select "select#user_college", :name => "user[college]"
     end
   end
 end

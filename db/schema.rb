@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120215194808) do
+ActiveRecord::Schema.define(:version => 20120222193457) do
 
   create_table "requests", :force => true do |t|
     t.string   "title"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20120215194808) do
     t.string   "college"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "picture"
   end
 
 end
