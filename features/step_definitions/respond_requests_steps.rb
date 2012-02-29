@@ -7,8 +7,8 @@ Then /^a flash message displays "([^']*)"$/ do |arg1|
 end
 
 Given /^there are one or more pending requests$/ do
-  @request1 = Request.create!(:title => "Bicycle", :date => Time.now + 5.days, :description => "Give me your bike!", :posted_by => "Harry Potter")
-  @request2 = Request.create!(:title => "Frisbee", :date => Time.now + 8.days, :description => "Wanna Frisbee", :posted_by => "Herman Cain")
+  @request1 = Request.create!(:title => "Bicycle", :date => Time.now + 5.days, :description => "Give me your bike!")
+  @request2 = Request.create!(:title => "Frisbee", :date => Time.now + 8.days, :description => "Wanna Frisbee")
 end
 
 Then /^I am displayed a list of all the current requests$/ do
@@ -16,7 +16,7 @@ Then /^I am displayed a list of all the current requests$/ do
 end
 
 Given /^the show page of a request$/ do
-  @request1 = Request.create!(:title => "Bicycle", :date => Time.now + 5.days, :description => "Give me your bike!", :posted_by => "Harry Potter")
+  @request1 = Request.create!(:title => "Bicycle", :date => Time.now + 5.days, :description => "Give me your bike!")
   visit request_path(@request1)
 end
 
