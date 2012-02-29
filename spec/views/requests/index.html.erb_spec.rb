@@ -1,24 +1,27 @@
 require 'spec_helper'
+require 'webrat'
 
 describe "requests/index" do
   before(:each) do
     assign(:requests, [
       stub_model(Request,
-        :title => "Title",
-        :description => "MyText"
+        :title => "Request1",
+        :description => "Bloh bloh bloh bloh bloh bloh",
+        :date => Time.now + 3.days
       ),
       stub_model(Request,
-        :title => "Title",
-        :description => "MyText"
+        :title => "Request2",
+        :description => "Blah blah blah blah blah",
+        :date => Time.now + 3.days
       )
     ])
+
+    @title = "Pending Requests"
   end
 
   it "renders a list of requests" do
     render
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    assert_select "tr>td", :text => "Title".to_s, :count => 2
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    assert_select "tr>td", :text => "MyText".to_s, :count => 2
+    rendered.should have_selector('title', content: @title)
+    rendered.should have_selector('.request', count: 2)
   end
 end
