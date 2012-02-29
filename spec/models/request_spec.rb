@@ -10,45 +10,48 @@ describe Request do
   	}
   end
 
-  it "should allow a new request given valid attributes" do
-  	Request.create(@attributes).should be_valid
-  end
+  describe 'create new request' do
 
-  it "should not allow a request without a title" do
-  	@attributes[:title] = ""
-  	Request.create(@attributes).should_not be_valid
-  end
+    it "should allow a new request given valid attributes" do
+    	Request.create(@attributes).should be_valid
+    end
 
-  it "should not allow a request without a date" do
-  	@attributes[:date] = ""
-  	Request.create(@attributes).should_not be_valid
-  end
+    it "should not allow a request without a title" do
+  	  @attributes[:title] = ""
+  	  Request.create(@attributes).should_not be_valid
+    end
 
-  it "should not allow a request with a date more than a year from now" do
-  	date = Time.now + 1.year + 1.day
-  	@attributes[:date] = date
-  	Request.create(@attributes).should_not be_valid
-  end
+    it "should not allow a request without a date" do
+  	  @attributes[:date] = ""
+  	  Request.create(@attributes).should_not be_valid
+    end
 
-  it "should allow a request with a date less than a year from now" do
-  	date = Time.now + 1.year - 1.day
-  	@attributes[:date] = date
-  	Request.create(@attributes).should_not be_valid
-  end
+    it "should not allow a request with a date more than a year from now" do
+  	  date = Time.now + 1.year + 1.day
+    	@attributes[:date] = date
+    	Request.create(@attributes).should_not be_valid
+   end
 
-  it "should not allow a request with a date not in DateTime format" do
-  	@attributes[:date] = "11/24"
-  	Request.create(@attributes).should_not be_valid
-  end
+    it "should allow a request with a date less than a year from now" do
+    	date = Time.now + 1.year - 1.day
+    	@attributes[:date] = date
+     	Request.create(@attributes).should_not be_valid
+   end
 
-  it "should allow a request without a description" do
-  	@attributes[:description] = ""
-  	Request.create(@attributes).should be_valid
-  end
+    it "should not allow a request with a date not in DateTime format" do
+    	@attributes[:date] = "11/24"
+    	Request.create(@attributes).should_not be_valid
+   end
 
-  it "should not allow a request with a name and title pair that is not unique" do
-  	Request.create(@attributes)
-  	Request.create(@attributes).should_not be_valid
+   it "should allow a request without a description" do
+    	@attributes[:description] = ""
+    	Request.create(@attributes).should be_valid
+   end
+
+   it "should not allow a request with a name and title pair that is not unique" do
+    	Request.create(@attributes)
+    	Request.create(@attributes).should_not be_valid
+   end
   end
 
   describe "search requests" do
@@ -78,7 +81,6 @@ describe Request do
       result = Request.search("give me")
       result.count.should == 1
     end
-
   end
-
+  
 end

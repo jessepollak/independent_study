@@ -90,5 +90,4 @@ class RequestsController < ApplicationController
     end
   end
     
-  end
 end
