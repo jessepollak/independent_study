@@ -11,14 +11,7 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :fb_id %><br />
-    <%= f.text_field :fb_id %>
-  </div>
+
   <div class="field">
     <%= f.label :email %><br />
     <%= f.text_field :email %>
@@ -29,9 +22,13 @@
   </div>
   <div class="field">
     <%= f.label :college %><br />
-    <%= f.text_field :college %>
+    <%= f.select :college, ["Pomona", "Claremont McKenna", "Scripps", "Pitzer", "Harvey Mudd", "Claremont Graditute University", "Keck Graduate Institue of Applied Life Sciences"] %>
   </div>
+  
+  <%=f.hidden_field :fb_id%>
+  <%=f.hidden_field :name%>
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Submit" %>
   </div>
 <% end %>

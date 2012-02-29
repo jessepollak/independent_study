@@ -4,6 +4,14 @@ IndependentStudy::Application.routes.draw do
 
   resources :users
 
+  match "/auth/:provider/callback" => "users#new"
+  match "/auth/failure" => "sessions#failure"
+
+  get 'session/destroy'
+  get 'session/create'
+
+  root to: 'requests#index'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
