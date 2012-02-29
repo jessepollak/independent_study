@@ -30,3 +30,17 @@ RSpec.configure do |config|
   # rspec-rails.
   config.infer_base_class_for_anonymous_controllers = false
 end
+
+OmniAuth.config.test_mode = true
+OmniAuth.config.mock_auth[:facebook] = {
+  :provider => 'facebook',
+  :uid => '12345',
+  :info => {
+      :nickname => 'fooman',
+      :email => 'test@example.com',
+      :name => 'Foo Bar',
+      :first_name => 'Foo',
+      :last_name => 'Bar'
+  }
+
+}

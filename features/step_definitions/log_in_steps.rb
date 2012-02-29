@@ -5,6 +5,10 @@ end
 Given /^I accept the Facebook authentication$/ do
 end
 
+Then /^I am redirected to the new user page$/ do
+	response.should have_selector(:form, id: "new_user")
+end
+
 Given /^I do not accept the Facebook authentication$/ do
   OmniAuth.config.mock_auth[:facebook] = :invalid_credentials
 end

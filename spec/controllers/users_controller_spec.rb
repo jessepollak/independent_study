@@ -24,14 +24,39 @@ describe UsersController do
   # User. As you add validations to User, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    {name: "Foo Bar", fb_id: "12345", email: "test@example.com", number: "2223334444", college: "Pomona" }
   end
   
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # UsersController. Be sure to keep this updated too.
   def valid_session
-    {}
+    {current_user: User.new(valid_attributes)}
+  end
+
+  describe "USER registrarion" do
+
+    before do
+      request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook]
+      @hash = request.env["omniauth.auth"]
+      @id = OmniAuth.config.mock_auth[:facebook][:uid]
+    end
+
+    it "should render new when a new user registers" do
+      get :new
+      assigns(:user).fb_id.should == @id
+      response.should render_template('new')
+    end
+
+    it "should redirect_to :back when a old user returns" do
+      @user = User.new_user_from_hash(@hash)
+      @user.save
+      request.env["HTTP_REFERER"] = '/requests/index'
+      get :new
+      assigns(:current_user).should == @user
+      response.should redirect_to('/requests/index')
+    end
+
   end
 
   describe "GET index" do
@@ -50,12 +75,6 @@ describe UsersController do
     end
   end
 
-  describe "GET new" do
-    it "assigns a new user as @user" do
-      get :new, {}, valid_session
-      assigns(:user).should be_a_new(User)
-    end
-  end
 
   describe "GET edit" do
     it "assigns the requested user as @user" do
