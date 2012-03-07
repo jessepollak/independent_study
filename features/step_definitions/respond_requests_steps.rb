@@ -5,12 +5,12 @@ Given /^there are no pending requests$/ do
 end
 
 Then /^a flash message displays "([^']*)"$/ do |arg1|
-  response.should have_selector(".flash", :content => arg1)
+  response.should have_selector('.flash', :content => arg1)
 end
 
 Given /^there are one or more pending requests$/ do
-  @request = Request.create!(:title => "Bicycle", :date => (DateTime.now + 5), :description => "Give me your bike!")
-  @request2 = Request.create!(:title => "Frisbee", :date => (DateTime.now + 8), :description => "Wanna Frisbee")
+  @request = Request.create!(:title => "Bicycle", :date => (DateTime.now+5), :description => "Give me your bike!")
+  @request2 = Request.create!(:title => "Frisbee", :date => (DateTime.now+8), :description => "Wanna Frisbee")
 end
 
 Then /^I am displayed a list of all the current requests$/ do
