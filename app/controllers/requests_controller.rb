@@ -87,5 +87,4 @@ class RequestsController < ApplicationController
     @results = Request.where([sql, *query])
   end
     
-  end
 end
