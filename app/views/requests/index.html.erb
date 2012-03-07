@@ -1,5 +1,12 @@
 <h1>Listing requests</h1>
 
+<% if flash[:notice] %>
+<p id='flash'><%= flash[:notice] %></p>
+<% flash.delete(:notice) %>
+<% elsif @requests==[] %>
+<p id='empty'>There are currently no pending requests</p>
+<% end %>
+
 <table>
   <tr>
     <th>Title</th>
@@ -28,4 +35,5 @@
   <%= render :partial => 'search' %>
 </div>
 
-<%= link_to 'New Request', new_request_path %>
+<%= link_to 'New Request', new_request_path %><br />
+<%= link_to 'Home', requests_path %>

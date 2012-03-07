@@ -1,5 +1,9 @@
 <h1>Listing users</h1>
 
+<% if flash[:notice] %>
+    <p id='flash'><%= flash[:notice] %></p>
+<% end %>
+
 <table>
   <tr>
     <th>Name</th>

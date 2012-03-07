@@ -6,7 +6,7 @@ Given /^I accept the Facebook authentication$/ do
 end
 
 Then /^I am redirected to the new user page$/ do
-	response.should have_selector(:form, id: "new_user")
+	page.should have_selector("form", id: "new_user")
 end
 
 Given /^I do not accept the Facebook authentication$/ do
@@ -14,5 +14,5 @@ Given /^I do not accept the Facebook authentication$/ do
 end
 
 Then /^I am returned to the home page$/ do
-  response.should have_selector(:title, "Pending Requests")
+  page.should have_selector("title", "Pending Requests")
 end
