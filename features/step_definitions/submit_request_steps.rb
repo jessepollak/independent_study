@@ -7,9 +7,9 @@ Given /^I am on the new request page$/ do
 end
 
 Then /^I am taken to the show page for that request$/ do
-  response.should have_selector('.request_title'), content: @title
+  page.should have_selector('.request_title'), content: @title
 end
 
 Then /^I am returned to the form$/ do
-  response.should have_selector('title', content: 'New Request')
+  page.should have_selector('title', content: 'New Request')
 end

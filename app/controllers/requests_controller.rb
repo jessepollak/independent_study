@@ -84,11 +84,11 @@ class RequestsController < ApplicationController
   def search
     @requests = Request.search params[:search]
     if @requests == []
-      flash[:notice] = "There are currently no requests"
+      flash[:notice] = "No requests found"
     end
 
     respond_to do |format|
-      format.html { redirect_to requests_url }
+      format.html { render action: "index" }
       format.json { render json: @requests }
     end
   end

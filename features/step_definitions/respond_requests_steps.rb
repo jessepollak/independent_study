@@ -5,7 +5,11 @@ Given /^there are no pending requests$/ do
 end
 
 Then /^a flash message displays "([^']*)"$/ do |arg1|
-  response.should have_selector('.flash', :content => arg1)
+  page.should have_selector('.flash', :content => arg1)
+end
+
+Then /^the page displays "([^']*)"$/ do |arg1|
+  page.should have_selector('.empty', :content => arg1)
 end
 
 Given /^there are one or more pending requests$/ do
@@ -14,7 +18,7 @@ Given /^there are one or more pending requests$/ do
 end
 
 Then /^I am displayed a list of all the current requests$/ do
-  response.should contain(@request.description, @request.title, @request.date, @request2.title, @request2.date, @request2.description)
+  page.should contain(@request.description, @request.title, @request.date, @request2.title, @request2.date, @request2.description)
 end
 
 Given /^the show page of a request$/ do
@@ -39,7 +43,7 @@ When /^I do not select a request$/ do
 end
 
 Then /^I am on the requests page$/ do
-  response.should have_selector("title", :content => "Pending Requests")
+  page.should have_selector("title", :content => "Pending Requests")
 end
 
 When /^I select a request$/ do
@@ -47,9 +51,9 @@ When /^I select a request$/ do
 end
 
 Then /^I am returned to the show page of the request$/ do
-  response.should have_selector("title", :content => @request.title)
+  page.should have_selector("title", :content => @request.title)
 end
 
 Then /^I see the info posted by the user who made the request$/ do
-  response.should contain(@request1.description, @request.title, @request.date, @request.posted_by)
+  page.should contain(@request1.description, @request.title, @request.date, @request.posted_by)
 end
