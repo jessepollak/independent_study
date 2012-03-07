@@ -7,7 +7,7 @@ I want to be displayed a list of all the pending requests
 Scenario: There are no requests
 	Given I am on the home page
 	And there are no pending requests
-	Then a flash message displays "There are currently no requests"
+	Then the page displays "There are currently no pending requests"
 	
 Scenario: There are requests
 	Given I am on the home page

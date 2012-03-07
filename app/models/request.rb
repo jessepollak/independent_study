@@ -5,6 +5,6 @@ class Request < ActiveRecord::Base
 
 	def self.search(search)
 		query = "%" + search + "%"
-    	find(:all, :conditions => ['title ILIKE ? OR description ILIKE ?', query, query])
+    	find(:all, :conditions => ['title LIKE ? OR description LIKE ?', query, query])
    	end
 end

@@ -10,6 +10,9 @@ IndependentStudy::Application.routes.draw do
   get 'session/destroy'
   get 'session/create'
 
+  get 'requests/search'
+  post 'requests/search'
+
   root to: 'requests#index'
 
   # The priority is based upon order of creation:
