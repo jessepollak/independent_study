@@ -8,6 +8,7 @@ Feature: Log out
   
   Scenario: I log out
   	Given I am a logged in user
-  	When I click the "Sign out" link
+  	And the page contains "Sign out"
+  	When I visit "/session/destroy"
   	Then I am returned to the home page
   	And the page contains "Sign in"

@@ -5,6 +5,7 @@
 # files.
 
 require 'cucumber/rails'
+require 'capybara/rails'
 
 
 # Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In
@@ -22,7 +23,8 @@ OmniAuth.config.mock_auth[:facebook] = {
 	    :email => 'test@example.com',
 	    :name => 'Foo Bar',
 	    :first_name => 'Foo',
-	    :last_name => 'Bar'
+	    :last_name => 'Bar',
+	    :image => "www.testimage.com/image"
   }
 
 }

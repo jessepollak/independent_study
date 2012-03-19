@@ -1,4 +1,4 @@
-Feature: Log in and log out
+Feature: Log in
   
   So that users can sign in
   As a user
@@ -11,21 +11,37 @@ Feature: Log in and log out
   	And I accept the Facebook authentication
   	When I click the "Sign in" link
   	Then I am returned to the home page
-  	And a flash message displays "You have successfully signed in!"
 
-  Scenario: I do not have an account and accept the Facebook authentication
+  Scenario: I do not have an account and accept the Facebook authentication and enter valid information
     Given I am on the home page
     And I accept the Facebook authentication
     When I click the "Sign in" link
     Then I am redirected to the new user page
-    When I fill in "number" with "2023745555"
+    When I fill in "Number" with "2023745555"
     And I select "Pomona" for the "College"
     And I click the "Submit" button
     Then I am returned to the home page
-    And a flash message displays "You have successfully signed up!"
+    And I am stored in the database
 
-  Scenario: I deny the Facebook authentication
-  	Given I am on the home page
-  	And I do not accept the Facebook authentication
-  	When I click the "Sign in" link
-  	Then the page contains "Something went wrong with your Facebook authentication. Please return to the home page and try again."
+  Scenario: I do not have an account and accept the Facebook authentication and enter invalid number
+    Given I am on the home page
+    And I accept the Facebook authentication
+    When I click the "Sign in" link
+    Then I am redirected to the new user page
+    When I fill in "Number" with "202374555"
+    And I select "Pomona" for the "College"
+    And I click the "Submit" button
+    Then I am redirected to the new user page
+    And I am not stored in the database
+
+  Scenario: I do not have an account and accept the Facebook authentication and enter invalid email
+    Given I am on the home page
+    And I accept the Facebook authentication
+    When I click the "Sign in" link
+    Then I am redirected to the new user page
+    When I fill in "Number" with "2023745555"
+    When I fill in "Email" with "bademail"
+    And I select "Pomona" for the "College"
+    And I click the "Submit" button
+    Then I am redirected to the new user page
+    And I am not stored in the database

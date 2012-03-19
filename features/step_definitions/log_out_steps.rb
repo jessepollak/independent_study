@@ -1,3 +1,3 @@
 Then /^the page contains "([^']*)"$/ do |arg1|
-  page.should contain(arg1)
+  page.has_content? agr1
 end
