@@ -2,10 +2,10 @@
 
 
 <% if flash[:notice] %>
-<p id='flash'><%= flash[:notice] %></p>
+<p id="flash"><%= flash[:notice] %></p>
 <% flash.delete(:notice) %>
 <% elsif @requests==[] %>
-<p id='empty'>There are currently no pending requests</p>
+<p id="msg">There are currently no pending requests</p>
 <% end %>
 
 <table id = "requests-table">
@@ -19,7 +19,7 @@
   </tr>
 
 <% @requests.each do |request| %>
-  <tr>
+  <tr class="request">
     <td><%= request.title %></td>
     <td><%= request.description %></td>
     <td><%= request.date %></td>
