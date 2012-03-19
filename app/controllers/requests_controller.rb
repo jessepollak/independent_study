@@ -82,9 +82,15 @@ class RequestsController < ApplicationController
   end
 
   def search
-    query = params[:search].split.map {|term| "%#{term}%"}
-    sql = "title LIKE ? OR description LIKE ?"
-    @results = Request.where([sql, *query])
+    @requests = Request.search params[:search]
+    if @requests == []
+      flash[:notice] = "No requests found"
+    end
+
+    respond_to do |format|
+      format.html { render action: "index" }
+      format.json { render json: @requests }
+    end
   end
     
 end

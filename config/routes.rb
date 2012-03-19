@@ -1,4 +1,5 @@
 IndependentStudy::Application.routes.draw do
+  root :to => 'requests#index'
   resources :requests
 
   resources :users
@@ -8,6 +9,9 @@ IndependentStudy::Application.routes.draw do
 
   get 'session/destroy'
   get 'session/create'
+
+  get 'requests/search'
+  post 'requests/search'
 
   root to: 'requests#index'
 
