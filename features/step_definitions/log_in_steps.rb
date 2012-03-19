@@ -1,5 +1,5 @@
 Given /^I am on the home page$/ do
-  visit root_url
+  visit root_url(@requests)
 end
 
 Given /^I accept the Facebook authentication$/ do
