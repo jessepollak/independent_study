@@ -84,7 +84,9 @@ class RequestsController < ApplicationController
   def search
     @requests = Request.search params[:search]
     if @requests == []
-      flash[:notice] = "No requests found"
+      flash[:notice] = "No matching requests found"
+    else
+      flash[:notice] = "Matching requests"
     end
 
     respond_to do |format|

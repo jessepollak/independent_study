@@ -1,5 +1,3 @@
-
-
 Given /^I accept the Facebook authentication$/ do
 end
 
