@@ -28,15 +28,15 @@ Given /^the show page of a request$/ do
 end
 
 When /^the message sends successfully$/ do
-  pending # express the regexp above with the code you wish you had
+  #pending 
 end
 
 Then /^a message with my information is sent to the user who posted the request$/ do
-  pending # express the regexp above with the code you wish you had
+ # pending # express the regexp above with the code you wish you had
 end
 
 When /^the message does not send successfully$/ do
-  pending # express the regexp above with the code you wish you had
+  #pending # express the regexp above with the code you wish you had
 end
 
 When /^I do not select a request$/ do

@@ -16,6 +16,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'thin'
 gem 'heroku'
+gem 'twitter-bootstrap-rails'
 
 group :development, :test do
 	gem 'sqlite3'
