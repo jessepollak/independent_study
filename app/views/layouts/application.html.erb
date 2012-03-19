@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>IndependentStudy</title>
+  <title>Independent Study</title>
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -9,8 +9,16 @@
 <body>
 
 <div>
-	<a href ="/auth/facebook">Sign in</a>
+	<%unless signed_in? %>
+		<%=link_to "Sign in", controller: "session", action: "create"%>
+	<%else%>
+		<%=link_to "Sign out", controller: "session", action: "destroy"%>
+	<%end%>
+</div>
+
 <div>
+	<%=@current_user%>
+</div>
 <%= yield %>
 
 </body>
