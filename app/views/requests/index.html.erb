@@ -1,5 +1,6 @@
 <h1>Listing requests</h1>
 
+
 <% if flash[:notice] %>
 <p id='flash'><%= flash[:notice] %></p>
 <% flash.delete(:notice) %>
@@ -7,7 +8,7 @@
 <p id='empty'>There are currently no pending requests</p>
 <% end %>
 
-<table>
+<table id = "requests-table">
   <tr>
     <th>Title</th>
     <th>Description</th>
