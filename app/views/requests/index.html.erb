@@ -1,11 +1,10 @@
 <h1>Listing requests</h1>
 
-
 <% if flash[:notice] %>
-<p id="flash"><%= flash[:notice] %></p>
-<% flash.delete(:notice) %>
+  <p id="flash"><%= flash[:notice] %></p>
+  <% flash.delete(:notice) %>
 <% elsif @requests==[] %>
-<p id="msg">There are currently no pending requests</p>
+  <p id="msg">There are currently no pending requests</p>
 <% end %>
 
 <table id = "requests-table" class = "table table-striped table-bordered">
