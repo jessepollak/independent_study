@@ -8,33 +8,20 @@
 <p id="msg">There are currently no pending requests</p>
 <% end %>
 
-<table id = "requests-table">
+<table id = "requests-table" class = "table table-striped table-bordered">
   <tr>
     <th>Title</th>
     <th>Description</th>
     <th>Date</th>
-    <th></th>
-    <th></th>
     <th></th>
   </tr>
 
 <% @requests.each do |request| %>
   <tr class="request">
     <td><%= request.title %></td>
-    <td><%= request.description %></td>
-    <td><%= request.date %></td>
-    <td><%= link_to 'Show', request %></td>
-    <td><%= link_to 'Edit', edit_request_path(request) %></td>
-    <td><%= link_to 'Destroy', request, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= truncate(request.description, length: 100) %></td>
+    <td><%= request.date.strftime("%A %m/%d") %></td>
+    <td><%= link_to 'Show', request %></td>d
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<div id = "search">
-  <%= render :partial => 'search' %>
-</div>
-
-<%= link_to 'New Request', new_request_path %><br />
-<%= link_to 'Home', requests_path %>
