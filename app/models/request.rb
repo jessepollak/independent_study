@@ -3,6 +3,8 @@ class Request < ActiveRecord::Base
 	validates_uniqueness_of :description, :scope => :title
 	validates_with DateValidator
 
+	belongs_to :user
+
 	def self.search(search)
 		query = "%" + search + "%"
     	find(:all, :conditions => ['title LIKE ? OR description LIKE ?', query, query])
