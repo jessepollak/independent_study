@@ -47,10 +47,6 @@ Then /^I am on the requests page$/ do
   page.should have_selector("title", :content => "Pending Requests")
 end
 
-When /^I select a request$/ do
-  click_link request_path(@request)
-end
-
 Then /^I am returned to the show page of the request$/ do
   page.should have_selector("title", :content => @request.title)
 end

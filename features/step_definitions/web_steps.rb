@@ -71,3 +71,7 @@ end
 Then /^a flash message is displayed$/ do
 	page.has_selector? '.flash'
 end
+
+When /^I select a request$/ do
+	click_link 'Show'
+end
