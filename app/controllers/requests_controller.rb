@@ -24,7 +24,8 @@ class RequestsController < ApplicationController
   # GET /requests/new
   # GET /requests/new.json
   def new
-    @request = Request.new
+    @request = @current_user.requests.build
+    @form_name = "Submit a new request"
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,12 +36,13 @@ class RequestsController < ApplicationController
   # GET /requests/1/edit
   def edit
     @request = Request.find(params[:id])
+    @form_name = "Edit request"
   end
 
   # POST /requests
   # POST /requests.json
   def create
-    @request = Request.new(params[:request])
+    @request = @current_user.requests.create(params[:request])
 
     respond_to do |format|
       if @request.save
@@ -84,9 +86,9 @@ class RequestsController < ApplicationController
   def search
     @requests = Request.search params[:search]
     if @requests == []
-      flash[:notice] = "No matching requests found"
+      flash[:notice] = "No matching requests found. Please try searching again."
     else
-      flash[:notice] = "Matching requests"
+      flash[:notice] = "We found #{@requests.length} matching #{view_context.pluralize(@requests.length, 'request').split(" ")[1]}"
     end
 
     respond_to do |format|

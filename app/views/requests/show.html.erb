@@ -1,20 +1,19 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Title:</b>
-  <%= @request.title %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @request.description %>
-</p>
-
-<p>
-  <b>Date:</b>
-  <%= @request.date %>
-</p>
+<div class="row" id="request-show">
 
 
-<%= link_to 'Edit', edit_request_path(@request) %> |
-<%= link_to 'Back', requests_path %>
+	<table id = "requests-table" class = "table table-striped table-bordered">
+		<tr>
+			<th class="span2">Title</th>
+			<td><%=@request.title%></td>
+		</tr>
+		<tr>
+			<th class="span2">Description</th>
+			<td><%=@request.description%></td>
+		</tr>
+		<tr>
+			<th class="span2">Date needed</th>
+			<td><%=@request.date.strftime("%A %m/%d") %></td>
+		</tr>
+	</table>
+
+</div>	
