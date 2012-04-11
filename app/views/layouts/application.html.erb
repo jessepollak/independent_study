@@ -25,13 +25,14 @@
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
           <div class="container">
-	          <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	          </a>
 	          <a class="brand" href="/">onLoan</a>
-            <ul class="nav pull-right">
+            <%=link_to "Post a Request", new_request_path, class: "btn pull-left"%>
+            <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+            <ul class="nav pull-right nav-collapse">
               <li>
 	             <%= render partial: 'requests/search' %>
               </li>

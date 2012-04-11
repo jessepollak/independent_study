@@ -6,6 +6,46 @@ h1 {
 	text-align: center;
 }
 
-#index {
+#request-index {
 	min-height: 500px
+}
+
+#requests-table img {
+	margin-left: 12px;
+}
+
+#request-show {
+	#description {
+		margin-top: 50px;
+		min-height: 150px;
+	}
+
+	.fb-info {
+		float: right;
+
+		.fb-name {
+			float: left;
+			a {
+				display: block;
+				font-size: 18px;
+				width: 120px;
+				height: 20px;
+				overflow: hidden;
+				margin-bottom: 10px;
+			}
+		}
+
+		.fb-picture {
+			float: right;
+			margin-left: 10px;
+		}
+	}
+
+	.show-buttons {
+		float: left;
+	}
+}
+
+#msg {
+	text-align: center;
 }
