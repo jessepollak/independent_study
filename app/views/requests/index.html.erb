@@ -1,29 +1,45 @@
-<div id="index">
+<div id="request-index">
 
-  <h1>What do people need?</h1>
+  <div class="row">
+    <h1>What do people need?</h1>
+  </div>
 
-  <% if flash[:notice] %>
-    <p id="flash"><%= flash[:notice] %></p>
-    <% flash.delete(:notice) %>
-  <% elsif @requests==[] %>
-    <p id="msg">There are currently no pending requests</p>
-  <% end %>
+  <div class="row">
 
-  <table id = "requests-table" class = "table table-striped table-bordered">
-    
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Date</th>
-    </tr>
+    <% if flash[:notice] && !@requests.empty?%>
+      <p class="alert alert-success"><%= flash[:notice] %></p>
+      <% flash.delete(:notice) %>
+    <% elsif flash[:notice]%>
+      <p class="alert alert-error"><%= flash[:notice] %></p>
+    <% elsif @requests.empty? %>
+      <p id="msg" class="well">There are currently no pending requests</p>
+    <% end %>
 
-  <% @requests.each do |request| %>
-    
-      <tr onclick="location.href='<%=request_path(request)%>'" style="cursor:pointer" class="request">
-          <td><%= request.title %></td>
-          <td><%= truncate(request.description, length: 100) %></td>
-          <td><%= request.date.strftime("%A %m/%d") %></td>
-      </tr>
-  <% end %>
-  </table>
+    <%if !@requests.empty? %>
+      <table id = "requests-table" class = "table table-striped table-bordered">
+        
+        <tr>
+          <th>Requester</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Date</th>
+          <th>Reward</th>
+        </tr>
+
+      <% @requests.each do |request| %>
+        
+          <tr onclick="location.href='<%=request_path(request)%>'" style="cursor:pointer" class="request">
+              <td class="span1">
+                <img src=<%=request.user.picture%>>
+              </td>
+              <td class="span2"><%= request.title %></td>
+              <td><%= truncate(request.description, length: 100) %></td>
+              <td class="span2"><%= request.date.strftime("%A %m/%d") %></td>
+              <td>$1</td>
+          </tr>
+      <% end %>
+      </table>
+    <%end%>
+
+  </div>
 </div>

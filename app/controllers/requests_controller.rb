@@ -1,4 +1,6 @@
 class RequestsController < ApplicationController
+
+  before_filter :signed_in_check, only: [:new]
   # GET /requests
   # GET /requests.json
   def index
@@ -24,7 +26,8 @@ class RequestsController < ApplicationController
   # GET /requests/new
   # GET /requests/new.json
   def new
-    @request = Request.new
+    @request = @current_user.requests.build
+    @form_name = "Submit a new request"
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,12 +38,13 @@ class RequestsController < ApplicationController
   # GET /requests/1/edit
   def edit
     @request = Request.find(params[:id])
+    @form_name = "Edit request"
   end
 
   # POST /requests
   # POST /requests.json
   def create
-    @request = Request.new(params[:request])
+    @request = @current_user.requests.create(params[:request])
 
     respond_to do |format|
       if @request.save
@@ -57,7 +61,7 @@ class RequestsController < ApplicationController
   # PUT /requests/1.json
   def update
     @request = Request.find(params[:id])
-
+    owner_check(request)
     respond_to do |format|
       if @request.update_attributes(params[:request])
         format.html { redirect_to @request, notice: 'Request was successfully updated.' }
@@ -73,6 +77,7 @@ class RequestsController < ApplicationController
   # DELETE /requests/1.json
   def destroy
     @request = Request.find(params[:id])
+    owner_check(request)
     @request.destroy
 
     respond_to do |format|
@@ -84,9 +89,9 @@ class RequestsController < ApplicationController
   def search
     @requests = Request.search params[:search]
     if @requests == []
-      flash[:notice] = "No matching requests found"
+      flash[:notice] = "No matching requests found. Please try searching again."
     else
-      flash[:notice] = "Matching requests"
+      flash[:notice] = "We found #{@requests.length} matching #{view_context.pluralize(@requests.length, 'request').split(" ")[1]}"
     end
 
     respond_to do |format|
@@ -94,5 +99,22 @@ class RequestsController < ApplicationController
       format.json { render json: @requests }
     end
   end
+
+  protected
+
+    helper_method :signed_in_check, :owner_check
+
+    def owner_check(request)
+      unless @current_user.requests.member? request
+        redirect_to root_url
+      end
+    end
+
+    def signed_in_check
+      unless signed_in?
+        redirect_to controller: "session", action: "intermediate"
+      end
+    end
+
     
 end
