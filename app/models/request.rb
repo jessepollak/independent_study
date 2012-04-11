@@ -4,6 +4,7 @@ class Request < ActiveRecord::Base
 	validates_with DateValidator
 
 	belongs_to :user
+	has_many :messages
 
 	def self.search(search)
 		query = "%" + search + "%"
