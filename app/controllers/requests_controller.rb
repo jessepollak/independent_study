@@ -1,4 +1,6 @@
 class RequestsController < ApplicationController
+
+  before_filter :signed_in_check, only: [:new]
   # GET /requests
   # GET /requests.json
   def index
@@ -59,7 +61,7 @@ class RequestsController < ApplicationController
   # PUT /requests/1.json
   def update
     @request = Request.find(params[:id])
-
+    owner_check(request)
     respond_to do |format|
       if @request.update_attributes(params[:request])
         format.html { redirect_to @request, notice: 'Request was successfully updated.' }
@@ -75,6 +77,7 @@ class RequestsController < ApplicationController
   # DELETE /requests/1.json
   def destroy
     @request = Request.find(params[:id])
+    owner_check(request)
     @request.destroy
 
     respond_to do |format|
@@ -96,5 +99,22 @@ class RequestsController < ApplicationController
       format.json { render json: @requests }
     end
   end
+
+  protected
+
+    helper_method :signed_in_check, :owner_check
+
+    def owner_check(request)
+      unless @current_user.requests.member? request
+        redirect_to root_url
+      end
+    end
+
+    def signed_in_check
+      unless signed_in?
+        redirect_to controller: "session", action: "intermediate"
+      end
+    end
+
     
 end

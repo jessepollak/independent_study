@@ -12,7 +12,7 @@
     <% elsif flash[:notice]%>
       <p class="alert alert-error"><%= flash[:notice] %></p>
     <% elsif @requests.empty? %>
-      <p id="msg">There are currently no pending requests</p>
+      <p id="msg" class="well">There are currently no pending requests</p>
     <% end %>
 
     <%if !@requests.empty? %>

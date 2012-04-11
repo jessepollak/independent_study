@@ -15,4 +15,8 @@ class User < ActiveRecord::Base
 	def self.find_from_hash(hash)
 		User.find_by_fb_id(hash[:uid])
 	end
+
+	def admin?
+		false
+	end
 end
