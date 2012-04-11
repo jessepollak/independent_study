@@ -25,13 +25,14 @@
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
           <div class="container">
-	          <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	          </a>
 	          <a class="brand" href="/">onLoan</a>
-            <ul class="nav pull-right">
+            <%=link_to "Post a Request", new_request_path, class: "btn pull-left"%>
+            <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+            <ul class="nav pull-right nav-collapse">
               <li>
 	             <%= render partial: 'requests/search' %>
               </li>
@@ -51,14 +52,16 @@
     <div class="container">
       <div class="content">
         <div class="row">
-           <div class="span9">
+           <div class="span10 offset1">
               <%= yield %>
             </div>
         </div><!--/row-->
       </div><!--/content-->
 
       <footer>
-        <p>&copy; Company 2012</p>
+        <div >
+          <p>Created by Kim Merril and <a href="http://twitter.com/jessepollak">@jessepollak</a></p>
+        </div>
       </footer>
 
     </div> <!-- /container -->

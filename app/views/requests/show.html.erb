@@ -1,4 +1,37 @@
-<p id="notice"><%= notice %></p>
+<div class="row" id="request-show">
+	<div class="padded-top">
+		<div class="well span8 offset1">
+			<h2><%=@request.title%>
+				<span class="pull-right"><%=@request.date.strftime("%A %m/%d") %></span>
+			</h2>
+			<p id="description">
+				<%=@request.description%>
+			</p>
+			<div id="footer-row" class="row-fluid">
+				<div class="span4">
+					<div class="show-buttons">
+						<a class="btn btn-success btn-large" href="#">Lend</a>
+						<a class="btn btn-default btn-large" href=<%=root_url%>>Back</a>
+					</div>
+					<div class="clear-both">
+					</div>
+				</div>
+				<div class="span8">
+					<div class="fb-info">
+						<div class="fb-name">
+							<a href=<%="http://facebook.com/" + @request.user.fb_id%>><%=@request.user.name%></a>
+							<p><%=@request.user.college%></p>
+						</div>
+						<div class="fb-picture">
+							<img src=<%=@request.user.picture%> alt="Profile picture"></img>
+						</div>
+					</div>
+					<div class="clear-both">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 <p>
   <b>Title:</b>
@@ -18,3 +51,4 @@
 <%= link_to 'Respond', new_message_path(:request_id => @request) %><br />
 <%= link_to 'Edit', edit_request_path(@request) %>
 <%= link_to 'Back', requests_path %>
+</div>	

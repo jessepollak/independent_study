@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_filter :admin_access, except: [:new, :edit, :create, :update]
+  before_filter :info_access, only: [:new, :edit, :create, :update]
   # GET /users
   # GET /users.json
   def index
@@ -27,12 +29,9 @@ class UsersController < ApplicationController
     @hash = request.env['omniauth.auth']
     if @user = User.find_from_hash(@hash)
       self.current_user = @user
-      if request.env['HTTP_REFERER']
-        redirect_to :back
-      else
-        redirect_to root_url
-      end
+      good_redirect(request.env['HTTP_REFERER'])
     else
+      @form_name = "New User"
       @user = User.new_user_from_hash(@hash)
 
       respond_to do |format|
@@ -44,6 +43,7 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
+    @form_name = "Edit User"
   end
 
   # POST /users
@@ -92,4 +92,16 @@ class UsersController < ApplicationController
       format.json { head :ok }
     end
   end
+
+  protected
+    helper_method :admin_access, :info_access
+      def info_access
+        if id = params[:id]
+          redirect_to root_url unless id == @current_user.id.to_s
+        end
+      end
+
+      def admin_access
+        redirect_to root_url unless @current_user.admin?
+      end
 end

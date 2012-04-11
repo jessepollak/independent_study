@@ -9,6 +9,7 @@ IndependentStudy::Application.routes.draw do
 
   get 'session/destroy'
   get 'session/create'
+  get 'session/intermediate'
 
   get 'requests/search'
   post 'requests/search'

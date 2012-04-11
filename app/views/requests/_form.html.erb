@@ -1,29 +1,41 @@
-<%= form_for(@request) do |f| %>
-  <% if @request.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@request.errors.count, "error") %> prohibited this request from being saved:</h2>
+<%= form_for@request, html: { class: "form-horizontal" } do |f| %>
+    <fieldset>
+        <legend><%=@form_name%></legend>
+    <% if @request.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@request.errors.count, "error") %> prohibited this request from being saved:</h2>
 
-      <ul>
-      <% @request.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% @request.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="control-group">
+      <%= f.label :title, class: "control-label" %>
+      <div class="controls">
+        <%= f.text_field :title, class: "input-xlarge" %>
+      </div>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :date %><br />
-    <%= f.datetime_select :date %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="control-group">
+      <%= f.label :description, class: "control-label" %>
+      <div class="controls">
+        <%= f.text_area :description, rows: 5, class: "input-xlarge" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :date, class: "control-label"%>
+      <div class="controls">
+        <%= f.datetime_select :date, { order: [:month, :day, :year], discard_minute: true, discard_hour: true} , { class: "span2"} %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit "Submit request", class: "btn btn-primary" %>
+    </div>
+  </fieldset>
 <% end %>

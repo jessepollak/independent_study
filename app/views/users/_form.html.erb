@@ -1,35 +1,59 @@
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<%= form_for(@user, html: { class: "form-horizontal" } ) do |f| %>
+  <fieldset>
+          <legend><%=@form_name%></legend>
 
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+    <% if @user.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+        <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="control-group">
+      <%= f.label :name, class: "control-label"%>
+      <div class="controls">
+        <%= f.text_field :name, class: "input", disabled: true%>
+      </div>
     </div>
-  <% end %>
 
+    <div class="control-group">
+      <%= f.label :picture, class: "control-label"%>
+      <div class="controls">
+        <%= f.hidden_field :picture%>
+        <img src=<%=@user.picture%>></img>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :number %><br />
-    <%= f.text_field :number %>
-  </div>
-  <div class="field">
-    <%= f.label :college %><br />
-    <%= f.select :college, ["Pomona", "Claremont McKenna", "Scripps", "Pitzer", "Harvey Mudd", "Claremont Graditute University", "Keck Graduate Institue of Applied Life Sciences"] %>
-  </div>
-  
-  <%=f.hidden_field :fb_id%>
-  <%=f.hidden_field :name%>
-  <%=f.hidden_field :picture%>
+    <div class="control-group">
+      <%= f.label :email, class: "control-label" %>
+      <div class="controls">
+        <%= f.text_field :email, class: "input-xlarge" %>
+      </div>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Submit" %>
-  </div>
+    <div class="control-group">
+      <%= f.label :number, class: "control-label" %>
+      <div class="controls">
+        <%= f.text_field :number, class: "input-xlarge" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :college, class: "control-label"%>
+      <div class="controls">
+        <%= f.select :college, ["Pomona College", "Claremont McKenna College", "Scripps College", "Pitzer College", "Harvey Mudd", "Claremont Graditute University", "Keck Graduate Institue of Applied Life Sciences"] %>
+      </div>
+    </div>
+    
+    <%=f.hidden_field :fb_id%>
+
+    <div class="form-actions">
+      <%= f.submit "Submit", class: "btn btn-primary" %>
+      </div>
+  </fieldset>
 <% end %>
