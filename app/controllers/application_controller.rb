@@ -27,8 +27,7 @@ class ApplicationController < ActionController::Base
     end
 
     def good_redirect(r)
-      r = URI.parse(r).path
-      logger.debug r
+      r = URI.parse(r).path if r
       if r == "/session/intermediate"
         redirect_to controller: "requests", action: "new"
       elsif !r.nil?
