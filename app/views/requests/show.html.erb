@@ -10,7 +10,7 @@
 			<div id="footer-row" class="row-fluid">
 				<div class="span4">
 					<div class="show-buttons">
-						<a class="btn btn-success btn-large" href="#">Lend</a>
+						<a class="btn btn-success btn-large" href=<%=new_message_path(:request_id => @request)%>>Lend</a>
 						<a class="btn btn-default btn-large" href=<%=root_url%>>Back</a>
 					</div>
 					<div class="clear-both">
@@ -33,22 +33,4 @@
 		</div>
 	</div>
 
-<p>
-  <b>Title:</b>
-  <%= @request.title %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @request.description %>
-</p>
-
-<p>
-  <b>Date:</b>
-  <%= @request.date %>
-</p>
-
-<%= link_to 'Respond', new_message_path(:request_id => @request) %><br />
-<%= link_to 'Edit', edit_request_path(@request) %>
-<%= link_to 'Back', requests_path %>
 </div>	
