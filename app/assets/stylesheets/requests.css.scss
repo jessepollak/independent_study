@@ -2,8 +2,16 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-h1 {
+h1, h3 {
 	text-align: center;
+}
+
+th {
+	font-size: 18px;	
+}
+
+.top-margin {
+	margin-top: 5px;	
 }
 
 #request-index {
@@ -16,7 +24,7 @@ h1 {
 
 #request-show {
 	#description {
-		margin-top: 50px;
+		margin: 30px 40px;
 		min-height: 150px;
 	}
 
@@ -43,6 +51,7 @@ h1 {
 
 	.show-buttons {
 		float: left;
+		margin-left: 15px;
 	}
 }
 

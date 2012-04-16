@@ -1,18 +1,8 @@
 <div class="row" id="request-show">
 	<div class="padded-top">
 		<div class="well span8 offset1">
-			<h2><%=@request.title%>
-				<span class="pull-right">
-					<table>
-						<tr class="pull-right">
-							<td>Needed by:</td>
-						</tr>
-						<tr>
-							<td><%= format_date(@request.date)%></td>
-						</tr>
-					</table>
-				</span>
-			</h2>
+			<h1><%=@request.title%></h1>
+			<h3 class="top-margin">expires <%= format_date(@request.date)%></h3>
 			<p id="description">
 				<%=@request.description%>
 			</p>
@@ -32,7 +22,7 @@
 							<p><%=@request.user.college%></p>
 						</div>
 						<div class="fb-picture">
-							<img src=<%=@request.user.picture%> alt="Profile picture"></img>
+							<img class="thumbnail" src=<%=@request.user.picture%> alt="Profile picture"></img>
 						</div>
 					</div>
 					<div class="clear-both">
