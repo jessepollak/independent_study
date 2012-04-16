@@ -1,0 +1,23 @@
+<% if flash[:notice] %>
+  <p id="flash"><%= flash[:notice] %></p>
+<% end %>
+
+<p>
+  <b>Name</b>
+  <%= @message.name %>
+</p>
+
+<p>
+  <b>E-mail:</b>
+  <%= @message.email %>
+</p>
+
+<p>
+  <b>Phone:</b>
+  <%= @message.phone %>
+</p>
+
+<p>
+	<b>Message:</b>
+	<%= @message.message %>
+</p>

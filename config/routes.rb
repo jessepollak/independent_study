@@ -1,7 +1,7 @@
 IndependentStudy::Application.routes.draw do
   root :to => 'requests#index'
   resources :requests
-
+  resources :messages
   resources :users
 
   match "/auth/:provider/callback" => "users#new"
@@ -13,8 +13,6 @@ IndependentStudy::Application.routes.draw do
 
   get 'requests/search'
   post 'requests/search'
-
-  root to: 'requests#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
