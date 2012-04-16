@@ -16,7 +16,7 @@ class RequestsController < ApplicationController
   # GET /requests/1.json
   def show
     @request = Request.find(params[:id])
-    @response = Response.new
+    @response = Message.new
 
     respond_to do |format|
       format.html # show.html.erb
