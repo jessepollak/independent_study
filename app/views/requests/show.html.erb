@@ -2,7 +2,16 @@
 	<div class="padded-top">
 		<div class="well span8 offset1">
 			<h2><%=@request.title%>
-				<span class="pull-right"><%=@request.date.strftime("%A %m/%d") %></span>
+				<span class="pull-right">
+					<table>
+						<tr class="pull-right">
+							<td>Needed by:</td>
+						</tr>
+						<tr>
+							<td><%= format_date(@request.date)%></td>
+						</tr>
+					</table>
+				</span>
 			</h2>
 			<p id="description">
 				<%=@request.description%>

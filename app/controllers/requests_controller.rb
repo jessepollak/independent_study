@@ -115,6 +115,5 @@ class RequestsController < ApplicationController
         redirect_to controller: "session", action: "intermediate"
       end
     end
-
     
 end

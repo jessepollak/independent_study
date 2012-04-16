@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 	
 	validates :email, presence: true, email: true
+	validates_presence_of :name
 	validates :number, length: { is: 10, wrong_length: "The number you entered is not a valid phone number"}
 	
 	has_many :requests

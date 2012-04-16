@@ -10,4 +10,5 @@ class Request < ActiveRecord::Base
 		query = "%" + search + "%"
     	find(:all, :conditions => ['title LIKE ? OR description LIKE ?', query, query])
    	end
+   	
 end
