@@ -10,7 +10,7 @@
 			<div id="footer-row" class="row-fluid">
 				<div class="span4">
 					<div class="show-buttons">
-						<a class="btn btn-success btn-large" href=<%=new_message_path(:request_id => @request)%>>Lend</a>
+						<a class="btn btn-success btn-large" href="#">Lend</a>
 						<a class="btn btn-default btn-large" href=<%=root_url%>>Back</a>
 					</div>
 					<div class="clear-both">
@@ -32,5 +32,53 @@
 			</div>
 		</div>
 	</div>
-
 </div>	
+<div class="row response-form">
+	<div class="well span8 offset1">
+		<%= form_for @response, html: { class: "form-vertical" } do |f| %>
+		    <% if @request.errors.any? %>
+		      <div id="error_explanation">
+		        <h2><%= pluralize(@request.errors.count, "error") %> prohibited this request from being saved:</h2>
+
+		        <ul>
+		        <% @request.errors.full_messages.each do |msg| %>
+		          <li><%= msg %></li>
+		        <% end %>
+		        </ul>
+		      </div>
+		    <% end %>
+
+		    <div class="info">
+			    <div class="control-group">
+			      <%= f.label :name, class: "control-label" %>
+			      <div class="controls">
+			        <%= f.text_field :name, class: "input" %>
+			      </div>
+			    </div>
+
+			    <div class="control-group">
+			      <%= f.label :email, class: "control-label" %>
+			      <div class="controls">
+			        <%= f.text_field :email, class: "input" %>
+			      </div>
+			    </div>
+
+			    <div class="control-group">
+			      <%= f.label :phone, class: "control-label" %>
+			      <div class="controls">
+			        <%= f.text_field :phone, class: "input" %>
+			      </div>
+			    </div>
+			</div>
+			<div class="message">
+			    <div class="control-group">
+			      <%= f.label :message, class: "control-label" %>
+			      <div class="controls">
+			        <%= f.text_area :message, rows: 9, class: "input-xlarge" %>
+			      </div>
+			    </div>
+			</div>
+			<%= f.submit "Send!", class: "btn span3" %>
+		<% end %>
+	</div>
+</div>

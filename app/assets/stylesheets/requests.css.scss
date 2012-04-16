@@ -50,3 +50,17 @@ h1 {
 #msg {
 	text-align: center;
 }
+
+.response-form {
+	display: none;
+	.message {
+		margin-left: 50px;
+		float: left;
+		.btn {
+			float: right;
+		}
+	}
+	.info {
+		float: left;
+	}
+}
