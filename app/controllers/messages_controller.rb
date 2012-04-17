@@ -25,10 +25,8 @@ class MessagesController < ApplicationController
         format.html { redirect_to @message, notice: 'Thank you! Your message has been sent.' }
         format.json { render json: @message, status: :created, location: @message}
       else
-        format.html do
           @request = Request.find(@message.request_id)
-          render action: 'new' 
-        end
+          format.html { render template: 'requests/show' }
         format.json { render json: @message.errors, status: :unprocessable_entity }
       end
     end

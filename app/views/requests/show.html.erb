@@ -1,83 +1,104 @@
+<% if @message.errors.any? %>
+	<script type="text/javascript">
+		alert("Unable to send message. Please resolve invalid information.")
+	</script>
+<% end %>
+
 <div class="row" id="request-show">
-	<div class="padded-top">
-		<div class="well span8 offset1">
-			<h1><%=@request.title%></h1>
+		<div class="well span8 offset1 window">
+			<h1 class="well-top"><%=@request.title%></h1>
 			<h3 class="top-margin">expires <%= format_date(@request.date)%></h3>
+			<div id="loan-button"><a class="btn btn-success btn-xlarge" href="#">Loan
+				<span>Why loan? Every time you loan, you earn $1.
+					The more you loan, the more requests others will post,
+					and the more responses you'll get the next time you're in need!
+					Click to start building your onLoan karma.</span></a></div>
 			<p id="description">
 				<%=@request.description%>
 			</p>
-			<div id="footer-row" class="row-fluid">
-				<div class="span4">
-					<div class="show-buttons">
-						<a class="btn btn-success btn-large" href="#">Lend</a>
-						<a class="btn btn-default btn-large" href=<%=root_url%>>Back</a>
-					</div>
-					<div class="clear-both">
-					</div>
+			<div id="fb-table">
+				<table>
+					<tr>
+						<td class="fb-name"><a href=<%="http://facebook.com/" +
+						@request.user.fb_id%> target="_blank"><%=@request.user.name%></a></td>
+						<td rowspan="2"><a href=<%="http://facebook.com/" + @request.user.fb_id%> target="_blank">
+							<img class="thumbnail" src=<%=@request.user.picture%>
+							alt="Profile picture"></img></a></td>
+						</tr>
+						<tr>
+							<td><%=@request.user.college%></td>
+						</tr>
+					</table>
 				</div>
-				<div class="span8">
-					<div class="fb-info">
-						<div class="fb-name">
-							<a href=<%="http://facebook.com/" + @request.user.fb_id%>><%=@request.user.name%></a>
-							<p><%=@request.user.college%></p>
+				<div id="footer-row" class="row-fluid">
+					<div class="span4">
+						<div id="back-button">
+							<a class="btn btn-default btn-large" href=<%=root_url%>>
+								<i class="icon-chevron-left"></i> Back</a>
 						</div>
-						<div class="fb-picture">
-							<img class="thumbnail" src=<%=@request.user.picture%> alt="Profile picture"></img>
-						</div>
-					</div>
-					<div class="clear-both">
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</div>	
+</div>
+
+<div class="span10 offset1">
 <div class="row response-form">
-	<div class="well span8 offset1">
-		<%= form_for @response, html: { class: "form-vertical" } do |f| %>
-		    <% if @request.errors.any? %>
-		      <div id="error_explanation">
-		        <h2><%= pluralize(@request.errors.count, "error") %> prohibited this request from being saved:</h2>
+	<div class="well span8 offset1 window">
+		<a class="close" href="#"><i class="icon-remove"></i> </a>
+		
+		<div class="errors">
+		<%= form_for @message, html: { class: "form-vertical" } do |f| %>
+		<% if @message.errors.any? %>
+		    <div id="error_explanation">
+		      <h2><%= pluralize(@message.errors.count, "error") %> prohibited this message from being sent:</h2>
 
-		        <ul>
-		        <% @request.errors.full_messages.each do |msg| %>
-		          <li><%= msg %></li>
-		        <% end %>
-		        </ul>
-		      </div>
-		    <% end %>
+		      <ul>
+		      <% @message.errors.full_messages.each do |msg| %>
+		        <li><%= msg %></li>
+		      <% end %>
+		      </ul>
+		    </div>
+		  <% end %>
+		</div>
 
-		    <div class="info">
-			    <div class="control-group">
-			      <%= f.label :name, class: "control-label" %>
-			      <div class="controls">
-			        <%= f.text_field :name, class: "input" %>
-			      </div>
-			    </div>
-
-			    <div class="control-group">
-			      <%= f.label :email, class: "control-label" %>
-			      <div class="controls">
-			        <%= f.text_field :email, class: "input" %>
-			      </div>
-			    </div>
-
-			    <div class="control-group">
-			      <%= f.label :phone, class: "control-label" %>
-			      <div class="controls">
-			        <%= f.text_field :phone, class: "input" %>
-			      </div>
-			    </div>
+		<div class="info">
+			<div class="control-group">
+				<%= f.label :name, class: "control-label" %>
+				<div class="controls">
+					<%= f.text_field :name, class: "input" %>
+				</div>
 			</div>
-			<div class="message">
-			    <div class="control-group">
-			      <%= f.label :message, class: "control-label" %>
-			      <div class="controls">
-			        <%= f.text_area :message, rows: 9, class: "input-xlarge" %>
-			      </div>
-			    </div>
+
+			<div class="control-group">
+				<%= f.label :email, class: "control-label" %>
+				<div class="controls">
+					<%= f.text_field :email, class: "input" %>
+				</div>
 			</div>
-			<%= f.submit "Send!", class: "btn span3" %>
+
+			<div class="control-group">
+				<%= f.label :phone, "Phone (optional)", class: "control-label" %>
+				<div class="controls">
+					<%= f.text_field :phone, class: "input" %>
+				</div>
+			</div>
+		</div>
+		<div class="message">
+			<div class="control-group">
+				<%= f.label :message, class: "control-label" %>
+				<div class="controls">
+					<%= f.text_area :message, rows: 6, class: "input-xlarge" %>
+				</div>
+			</div>
+			<div>
+			<%= f.hidden_field :request_id, value: @request.id %>
+			</div>
+			<p>
+				<%= f.submit "Send", class: "btn span4" %>
+			</p>
+		</div>
 		<% end %>
+	</div>
 	</div>
 </div>

@@ -5,6 +5,7 @@ class RequestsController < ApplicationController
   # GET /requests.json
   def index
     @requests = Request.all
+    @requests.sort! { |a, b| a.date <=> b.date }
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,7 +17,7 @@ class RequestsController < ApplicationController
   # GET /requests/1.json
   def show
     @request = Request.find(params[:id])
-    @response = Message.new
+    @message = Message.new
 
     respond_to do |format|
       format.html # show.html.erb

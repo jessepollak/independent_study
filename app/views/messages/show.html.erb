@@ -1,6 +1,8 @@
+<h2>
 <% if flash[:notice] %>
   <p id="flash"><%= flash[:notice] %></p>
 <% end %>
+</h2>
 
 <p>
   <b>Name</b>
@@ -8,12 +10,12 @@
 </p>
 
 <p>
-  <b>E-mail:</b>
+  <b>Email:</b>
   <%= @message.email %>
 </p>
 
 <p>
-  <b>Phone:</b>
+  <b>Phone (optional):</b>
   <%= @message.phone %>
 </p>
 
