@@ -27,7 +27,6 @@
         </tr>
 
       <% @requests.each do |request| %>
-        
           <tr onclick="location.href='<%=request_path(request)%>'" style="cursor:pointer" class="request">
               <td class="span2" >
                 <img class="thumbnail" src=<%=request.user.picture%>>
@@ -35,7 +34,12 @@
               <td class="span2"><%= request.title %></td>
               <td><%= truncate(request.description, length: 100) %></td>
               <td class="span2"><%= format_date(request.date) %></td>
-              <td>$1</td>
+              <td>
+                <% if owner?(request) %>
+                   <%= link_to '', {:controller => 'requests', :action => 'destroy', :id => request}, :method => :delete, :confirm => "Delete this request?", :class => "close icon-remove" %>
+                <% end %>
+                $1
+              </td>
           </tr>
       <% end %>
       </table>
