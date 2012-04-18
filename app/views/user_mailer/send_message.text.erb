@@ -1,0 +1,16 @@
+Hi, <%= @user.name.split(" ")[0] %>,
+
+<%=@message.name%> just sent you a message on onLoan. They say:
+
+<%=@message.message%>
+
+Email: <%=@message.email%>.
+<%if @message.phone%>
+Phone: <%=@message.phone%>
+<%end%>
+
+Happy Lending!
+
+Sincrely,
+
+Kim and Jesse

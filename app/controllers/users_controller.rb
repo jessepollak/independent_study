@@ -33,7 +33,6 @@ class UsersController < ApplicationController
     else
       @form_name = "New User"
       @user = User.new_user_from_hash(@hash)
-
       respond_to do |format|
         format.html # new.html.erb
       end
@@ -56,6 +55,7 @@ class UsersController < ApplicationController
     
     respond_to do |format|
       if @user.save
+        self.current_user = @user
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render json: @user, status: :created, location: @user }
       else
