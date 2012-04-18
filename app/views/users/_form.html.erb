@@ -3,7 +3,7 @@
           <legend><%=@form_name%></legend>
 
     <% if @user.errors.any? %>
-      <div id="error_explanation">
+      <div class="alert alert-error">
         <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
         <ul>
