@@ -4,8 +4,7 @@ class RequestsController < ApplicationController
   # GET /requests
   # GET /requests.json
   def index
-    @requests = Request.all
-    @requests.sort! { |a, b| a.date <=> b.date }
+    @requests = Request.sort
 
     respond_to do |format|
       format.html # index.html.erb
@@ -79,8 +78,9 @@ class RequestsController < ApplicationController
   # DELETE /requests/1.json
   def destroy
     @request = Request.find(params[:id])
-    owner_check(request)
-    @request.destroy
+    if @current_user.requests.member? @request
+      @request.destroy
+    end
 
     respond_to do |format|
       format.html { redirect_to requests_url }
