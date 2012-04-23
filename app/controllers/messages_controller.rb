@@ -20,12 +20,13 @@ class MessagesController < ApplicationController
 
   def create
     @message = Message.new(params[:message])
+    UserMailer.send_message(@current_user, @message).deliver
+    @request = Request.find(@message.request_id)
     respond_to do |format|
       if @message.save
-        format.html { redirect_to @message, notice: 'Thank you! Your message has been sent.' }
-        format.json { render json: @message, status: :created, location: @message}
+        format.html { redirect_to @request, notice: 'Thank you! Your message has been sent.' }
+        format.json { render json: @request, status: :created}
       else
-          @request = Request.find(@message.request_id)
           format.html { render template: 'requests/show' }
         format.json { render json: @message.errors, status: :unprocessable_entity }
       end

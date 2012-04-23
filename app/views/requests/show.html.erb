@@ -1,4 +1,7 @@
 <div class="row" id="request-show">
+		<% if flash[:notice]%>
+      		<p class="alert alert-success span6 offset2"><%= flash[:notice] %></p>
+      	<%end%>
 		<div class="well span8 offset1 window">
 			<div class="sides well-top">
 				<div class="pull-left span5">

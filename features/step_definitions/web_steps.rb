@@ -17,8 +17,6 @@ When /^I give a valid date$/ do
 	select "2012", from: "request_date_1i"
 	select "September", from: "request_date_2i"
 	select "25", from: "request_date_3i"
-	select "8", from: "request_date_4i"
-	select "30", from: "request_date_5i"
 end
 
 #for submitting forms or hitting buttons
@@ -34,18 +32,20 @@ When /^I visit "([^']*)"$/ do |link|
 	visit link
 end
 
-When /^I submit a valid request$/ do
-	When 'I fill in "Title" with "Bicycle"'
-	When 'I fill in "Description" with "Give me your bike!"'
-	When 'I give "22 Feb 2012 04:05:06+03:30" for the date'
-	When 'I click the "Submit Request" button'
+When /^I submit a valid message$/ do
+	step 'I click the "Loan" link'
+	step 'I fill in "Name" with "Test name"'
+	step 'I fill in "Email" with "test@example.com"'
+	step 'I fill in "Message" with "This is a super cool test message."'
+	step 'I click the "Send" button'
 end
 
-When /^I submit an invalid request$/ do
-	When 'I fill in "Title" with ""'
-	When 'I fill in "Description" with "Give me your bike!"'
-	When 'I give "22 Feb 2012 04:05:06+03:30" for the date'
-	When 'I click the "Submit Request" button'
+When /^I submit an invalid message$/ do
+	step 'I click the "Loan" link'
+	step 'I fill in "Name" with ""'
+	step 'I fill in "Email" with "test@example.com"'
+	step 'I fill in "Message" with "This is a super cool test message."'
+	step 'I click the "Send" button'
 end
 
 Given /^I am on the home page$/ do
@@ -53,19 +53,13 @@ Given /^I am on the home page$/ do
 end
 
 Given /^I am a logged in user$/ do
-	user = User.new_user_from_hash({
-	:provider => 'facebook',
-	:uid => '12345',
-	:info => {
-	    :nickname => 'fooman',
-	    :email => 'test@example.com',
-	    :name => 'Foo Bar',
-	    :first_name => 'Foo',
-	    :last_name => 'Bar',
-	    :image => "www.testimage.com/image"
-  }})
-  user.save
-  visit "/session/create"
+	step 'I am on the home page'
+    step 'I accept the Facebook authentication'
+    step 'I click the "Sign in" link'
+    step 'I am redirected to the new user page'
+    step 'I fill in "user_number" with "2023745555"'
+    step 'I select "Pomona" for the "College"'
+    step 'I click the "Submit" button'
 end
 
 Then /^a flash message is displayed$/ do
