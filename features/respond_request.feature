@@ -4,21 +4,16 @@ So that users can offer to lend items in response to requests
 As a lender
 I want to submit a form with my information and send a message with that information to the user who posted the request
 
+@javascript
 Scenario: I enter valid info in every field and the message sends successfully
 	Given the show page of a request
 	When I submit a valid message
 	And the message sends successfully
 	Then a message with my information is sent to the user who posted the request
-	
-Scenario: I enter valid info in every field and the message does not send successfully
-	Given the show page of a request
-	When I submit a valid message
-	And the message does not send successfully
-	Then I am returned to the show page of the request
-	And a flash message displays "Error sending message"
 
+@javascript
 Scenario: I enter invalid info in one or more field
 	Given the show page of a request
 	When I submit an invalid message
 	Then I am returned to the show page of the request
-	And a flash message displays "Invalid information"
+	And there is a form error

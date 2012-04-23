@@ -33,7 +33,7 @@ When /^I visit "([^']*)"$/ do |link|
 end
 
 When /^I submit a valid message$/ do
-	step 'I click the "Loan" link'
+	find('.btn-success').click
 	step 'I fill in "Name" with "Test name"'
 	step 'I fill in "Email" with "test@example.com"'
 	step 'I fill in "Message" with "This is a super cool test message."'
@@ -41,7 +41,7 @@ When /^I submit a valid message$/ do
 end
 
 When /^I submit an invalid message$/ do
-	step 'I click the "Loan" link'
+	find('.btn-success').click
 	step 'I fill in "Name" with ""'
 	step 'I fill in "Email" with "test@example.com"'
 	step 'I fill in "Message" with "This is a super cool test message."'
@@ -49,7 +49,7 @@ When /^I submit an invalid message$/ do
 end
 
 Given /^I am on the home page$/ do
-  visit root_url
+  visit root_path
 end
 
 Given /^I am a logged in user$/ do
@@ -66,6 +66,10 @@ Then /^a flash message is displayed$/ do
 	page.has_selector? '.flash'
 end
 
+Then /^an alert message displays "([^']*)"$/ do |arg1|
+  page.should have_selector(".alert", :content => arg1)
+end
+
 When /^I select a request$/ do
-	click_link 'Show'
+	find('tr.request').click
 end
