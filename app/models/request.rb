@@ -9,7 +9,8 @@ class Request < ActiveRecord::Base
 
 	def self.search(search)
 		query = "%" + search + "%"
-    	find(:all, :conditions => ['title LIKE ? OR description LIKE ?', query, query])
+    	@requests = Request.find(:all, :conditions => ['date >= ? AND (title LIKE ? OR description LIKE ?)', Time.now, query, query])
+    	@requests.sort! { |a, b| a.date <=> b.date }
    end
 
    def self.sort()
