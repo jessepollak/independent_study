@@ -1,4 +1,7 @@
 <div class="row" id="request-show">
+		<% if flash[:notice]%>
+      		<p class="alert alert-success span6 offset2"><%= flash[:notice] %></p>
+      	<%end%>
 		<div class="well span8 offset1 window">
 			<h1 class="well-top"><%=@request.title%></h1>
 			<h3 class="top-margin">expires <%= format_date(@request.date)%></h3>

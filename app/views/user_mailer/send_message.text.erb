@@ -5,7 +5,7 @@ Hi, <%= @user.name.split(" ")[0] %>,
 <%=@message.message%>
 
 Email: <%=@message.email%>.
-<%if @message.phone%>
+<%if @message.phone != ""%>
 Phone: <%=@message.phone%>
 <%end%>
 
