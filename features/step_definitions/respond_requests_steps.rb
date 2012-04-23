@@ -4,10 +4,6 @@ Given /^there are no pending requests$/ do
   @requests.should be_nil
 end
 
-Then /^a flash message displays "([^']*)"$/ do |arg1|
-  page.should have_selector("#flash", :content => arg1)
-end
-
 Then /^the page displays "([^']*)"$/ do |arg1|
   page.should have_selector("#msg", :content => arg1)
 end
@@ -64,7 +60,6 @@ When /^the message does not send successfully$/ do
 end
 
 When /^I do not select a request$/ do
-  pending
 end
 
 Then /^I am on the requests page$/ do
@@ -72,9 +67,13 @@ Then /^I am on the requests page$/ do
 end
 
 Then /^I am returned to the show page of the request$/ do
-  page.should have_selector("title", :content => @request.title)
+  page.should have_selector(".response-form")
 end
 
 Then /^I see the info posted by the user who made the request$/ do
   page.should contain(@request.description, @request.title, @request.date)
+end
+
+Then /^there is a form error$/ do
+  page.should have_selector(".errors")
 end

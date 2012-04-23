@@ -10,6 +10,7 @@ Scenario: I do not select a request
 	When I do not select a request
 	Then I am on the requests page
 	
+@javascript
 Scenario: I select a request
 	Given I am on the home page
 	And there are one or more pending requests

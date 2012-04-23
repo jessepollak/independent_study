@@ -6,6 +6,7 @@
 
 require 'cucumber/rails'
 require 'capybara/rails'
+require 'selenium-webdriver'
 
 
 # Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In
@@ -13,6 +14,12 @@ require 'capybara/rails'
 # prefer to use XPath just remove this line and adjust any selectors in your
 # steps to use the XPath syntax.
 Capybara.default_selector = :css
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(app, :browser => :chrome)
+end
+
+
+
 
 OmniAuth.config.test_mode = true
 OmniAuth.config.mock_auth[:facebook] = {
