@@ -91,7 +91,7 @@ class RequestsController < ApplicationController
   def search
     @requests = Request.search params[:search]
     if @requests == []
-      flash[:notice] = "No matching requests found. Please try searching again."
+      flash[:notice] = "No matching requests found."
     else
       flash[:notice] = "We found #{@requests.length} matching #{view_context.pluralize(@requests.length, 'request').split(" ")[1]}"
     end

@@ -3,13 +3,16 @@
       		<p class="alert alert-success span6 offset2"><%= flash[:notice] %></p>
       	<%end%>
 		<div class="well span8 offset1 window">
-			<h1 class="well-top"><%=@request.title%></h1>
-			<h3 class="top-margin">expires <%= format_date(@request.date)%></h3>
-			<div id="loan-button"><a class="btn btn-success btn-xlarge" href="#">Loan
-				<span>Why loan? Every time you loan, you earn $1.
-					The more you loan, the more requests others will post,
-					and the more responses you'll get the next time you're in need!
-					Click to start building your onLoan karma.</span></a></div>
+			<div class="sides well-top">
+				<div class="pull-left span5">
+					<h1><%=@request.title%></h1>
+					<h3 class="top-margin">expires <%= format_date(@request.date)%></h3>
+				</div>
+				<div class="pull-right">
+					<p><a id="loan" class="btn btn-success btn-xlarge" href="#" rel="tooltip"
+						title="Reward: <%=@request.reward%>" data-placement="bottom">Loan</a></p>
+				</div>
+			</div>
 			<p id="description">
 				<%=@request.description%>
 			</p>
