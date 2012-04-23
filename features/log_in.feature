@@ -17,7 +17,7 @@ Feature: Log in
     And I accept the Facebook authentication
     When I click the "Sign in" link
     Then I am redirected to the new user page
-    When I fill in "Number" with "2023745555"
+    When I fill in "user_number" with "2023745555"
     And I select "Pomona" for the "College"
     And I click the "Submit" button
     Then I am returned to the home page
@@ -28,7 +28,7 @@ Feature: Log in
     And I accept the Facebook authentication
     When I click the "Sign in" link
     Then I am redirected to the new user page
-    When I fill in "Number" with "202374555"
+    When I fill in "user_number" with "202374555"
     And I select "Pomona" for the "College"
     And I click the "Submit" button
     Then I am redirected to the new user page
@@ -39,7 +39,7 @@ Feature: Log in
     And I accept the Facebook authentication
     When I click the "Sign in" link
     Then I am redirected to the new user page
-    When I fill in "Number" with "2023745555"
+    When I fill in "user_number" with "2023745555"
     When I fill in "Email" with "bademail"
     And I select "Pomona" for the "College"
     And I click the "Submit" button
