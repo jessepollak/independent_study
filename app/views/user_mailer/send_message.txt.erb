@@ -4,13 +4,12 @@ Hi <%= @user.name.split(" ")[0] %>,
 
 <%=@message.message%>
 
-Email: <%=@message.email%>.
-<%if false%>
-Phone: <%=@message.phone%>
-<%end%>
+Email: <%=@message.email%>
+<%="Phone: " + @message.phone if @message.phone.strip != ""%>
+
 
 Happy Lending!
 
-Sincrely,
+Sincerely,
 
 Kim and Jesse

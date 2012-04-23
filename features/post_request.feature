@@ -13,7 +13,7 @@ Feature: Post a request
     When I fill in "Title" with "Bicycle"
     And I fill in "Description" with "I really need to borrow a bicycle for next weekend"
     And I give a valid date
-    And I click the "Create Request" button
+    And I click the "Submit request" button
     Then I am taken to the show page for that request
 
     
@@ -23,7 +23,7 @@ Feature: Post a request
     When I fill in "Title" with ""
     And I fill in "Description" with "I really need to borrow a bicycle for next weekend"
     And I give a valid date
-    And I click the "Create Request" button
+    And I click the "Submit request" button
     Then I am returned to the form
     And a flash message is displayed
     
@@ -33,5 +33,5 @@ Feature: Post a request
     When I fill in "Title" with "Bicycle"
     And I fill in "Description" with ""
     And I give a valid date
-    And I click the "Create Request" button
+    And I click the "Submit request" button
     Then I am taken to the show page for that request
