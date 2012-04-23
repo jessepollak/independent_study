@@ -30,9 +30,17 @@
     <div class="control-group">
       <%= f.label :date, "Needed by", class: "control-label"%>
       <div class="controls">
-        <%= f.datetime_select :date, { order: [:month, :day, :year], discard_minute: true, discard_hour: true} , { class: "span2"} %>
+        <%= f.datetime_select :date, { order: [:month, :day, :year], discard_minute: true, discard_hour: true} , { class: "input-small"} %>
       </div>
     </div>
+
+    <div class="control-group">
+      <%= f.label :reward, class: "control-label" %>
+      <div class="controls reward">
+        <%= f.text_field :reward, value: "$1", class: "input-small" %>
+      </div>
+    </div>
+
 
     <div class="form-actions">
       <%= f.submit "Submit request", class: "btn btn-primary" %>

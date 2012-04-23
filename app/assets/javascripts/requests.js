@@ -8,5 +8,6 @@ $(document).ready(function() {
 	$('.close').on('click', function() {
 	response.slideUp('slow');
 	});
+	$('#loan').tooltip('show');
 });
 	
