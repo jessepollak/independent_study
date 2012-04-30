@@ -70,10 +70,6 @@ Then /^I am returned to the show page of the request$/ do
   page.should have_selector(".response-form")
 end
 
-Then /^I see the info posted by the user who made the request$/ do
-  page.should contain(@request.description, @request.title, @request.date)
-end
-
 Then /^there is a form error$/ do
   page.should have_selector(".errors")
 end
