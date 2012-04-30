@@ -20,6 +20,7 @@ class MessagesController < ApplicationController
 
   def create
     @message = Message.new(params[:message])
+    logger.debug "Message" + @message.to_json
     @request = Request.find(@message.request_id)
     respond_to do |format|
       if @message.save
