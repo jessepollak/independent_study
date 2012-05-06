@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :admin_access, except: [:new, :edit, :create, :update]
-  before_filter :info_access, only: [:new, :edit, :create, :update]
+  before_filter :admin_access, except: [:new, :edit, :create, :update, :destroy]
+  before_filter :info_access, only: [:new, :edit, :create, :update, :destroy]
  
   # GET /users/new
   # GET /users/new.json
