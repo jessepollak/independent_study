@@ -50,6 +50,10 @@ describe RequestsController do
     @current_user = user
   end
 
+  after(:all) do
+    @current_user.destroy
+  end
+
   describe "GET index" do
     it "assigns all requests as @requests" do
       request = @current_user.requests.create valid_attributes
