@@ -26,13 +26,6 @@ describe UsersController do
   def valid_attributes
     {name: "Foo Bar", fb_id: "12345", email: "test@example.com", number: "2223334444", college: "Pomona" }
   end
-  
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # UsersController. Be sure to keep this updated too.
-  def valid_session
-    {}
-  end
 
   describe "USER registration" do
 
@@ -73,18 +66,18 @@ describe UsersController do
     describe "with valid params" do
       it "creates a new User" do
         expect {
-          post :create, {:user => valid_attributes}, valid_session
+          post :create, {:user => valid_attributes}
         }.to change(User, :count).by(1)
       end
 
       it "assigns a newly created user as @user" do
-        post :create, {:user => valid_attributes}, valid_session
+        post :create, {:user => valid_attributes}
         assigns(:user).should be_a(User)
         assigns(:user).should be_persisted
       end
 
       it "redirects to the created user" do
-        post :create, {:user => valid_attributes}, valid_session
+        post :create, {:user => valid_attributes}
         response.should redirect_to(User.last)
       end
     end
@@ -93,14 +86,14 @@ describe UsersController do
       it "assigns a newly created but unsaved user as @user" do
         # Trigger the behavior that occurs when invalid params are submitted
         User.any_instance.stub(:save).and_return(false)
-        post :create, {:user => {}}, valid_session
+        post :create, {:user => {}}
         assigns(:user).should be_a_new(User)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         User.any_instance.stub(:save).and_return(false)
-        post :create, {:user => {}}, valid_session
+        post :create, {:user => {}}
         response.should render_template("new")
       end
     end
