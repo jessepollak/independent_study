@@ -1,0 +1,44 @@
+Bicycle:
+    title: Small women's bike
+    description: "I'm looking to borrow a women's mountain bike for a weekend trip. I'm 5'2'', so a small bike would be preferable (or one with a highly adjustable seat). Also, if you have a helmet and bike pump I could use, that would be fantastic! Bonus points if it's stylish."
+    date: <%= Time.now + 2000000 %>
+    reward: $2
+    created_at: <%= Time.now %>
+    updated_at: <%= Time.now %>
+    user_id: 1
+    
+Bananagrams:
+    title: Bananagrams?!
+    description: "My sponsor group had the strongest urge to play Bananagrams last night, but to our dismay, we found we're missing our set of tiles. If you have a game you're willing to share, we'd really appreciate it! And, of course, you're more than welcome to join in on our game night!"
+    date: <%= Time.now + 900000 %>
+    reward: Sweet gaming companions
+    created_at: <%= Time.now %>
+    updated_at: <%= Time.now %>
+    user_id: 1
+    
+Wok:
+    title: Wok
+    description: "I need a a decent-sized wok to steam some dumplings. I'll share some of them with you!"
+    date: <%= Time.now + 700000 %>
+    reward: Dumplings! Mmmm...
+    created_at: <%= Time.now %>
+    updated_at: <%= Time.now %>
+    user_id: 1
+    
+Textbook:
+    title: Microeconomics and Behavior Textbook
+    description: "Dropped mine in a toilet, and I have a midterm coming up. I only need it for one night, and I'll be sure to get it back to you the next morning!"
+    date: <%= Time.now + 500000 %>
+    reward: $1
+    created_at: <%= Time.now %>
+    updated_at: <%= Time.now %>
+    user_id: 1
+    
+Blazer:
+    title: Black women's blazer
+    description: "Does anyone have small, black women's blazer they'd be willing to lend me for a day? I have a big interview and nothing professional to wear!"
+    date: <%= Time.now + 4000000 %>
+    reward: $1
+    created_at: <%= Time.now %>
+    updated_at: <%= Time.now %>
+    user_id: 1

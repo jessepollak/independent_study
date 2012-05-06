@@ -31,12 +31,15 @@
 					</table>
 				</div>
 				<div id="footer-row" class="row-fluid">
-					<div class="span4">
-						<div id="back-button">
-							<a class="btn btn-default btn-large" href=<%=root_url%>>
+						<div class="footer-button">
+							<a class="btn btn-large" href=<%=root_url%>>
 								<i class="icon-chevron-left"></i> Back</a>
 						</div>
-					</div>
+						<div class="footer-button">
+							<% if owner?(@request) %>
+								<%= button_to 'Delete', {:controller => 'requests', :action => 'destroy', :id => @request}, :method => :delete, :confirm => "Delete this request?", :class => "btn btn-danger btn-large" %>
+							<% end %>
+						</div>
 				</div>
 			</div>
 		</div>
