@@ -6,7 +6,7 @@ describe Request do
   	@attributes = {
   		:title => "Bicycle",
   		:description => "Give me your bike!",
-  		:date => Time.now - 150.day
+  		:date => Time.now + 1.day
   	}
   end
 
@@ -22,26 +22,9 @@ describe Request do
     end
 
     it "should not allow a request without a date" do
-  	  @attributes[:date] = ""
+  	  @attributes[:date] = nil
   	  Request.create(@attributes).should_not be_valid
     end
-
-    it "should not allow a request with a date more than a year from now" do
-  	  date = Time.now + 1.year + 1.day
-    	@attributes[:date] = date
-    	Request.create(@attributes).should_not be_valid
-   end
-
-    it "should allow a request with a date less than a year from now" do
-    	date = Time.now + 1.year - 1.day
-    	@attributes[:date] = date
-     	Request.create(@attributes).should_not be_valid
-   end
-
-    it "should not allow a request with a date not in DateTime format" do
-    	@attributes[:date] = "11/24"
-    	Request.create(@attributes).should_not be_valid
-   end
 
    it "should allow a request without a description" do
     	@attributes[:description] = ""
