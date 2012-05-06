@@ -34,7 +34,7 @@ describe UsersController do
     {current_user: User.new(valid_attributes)}
   end
 
-  describe "USER registrarion" do
+  describe "USER registration" do
 
     before do
       request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook]
@@ -59,28 +59,11 @@ describe UsersController do
 
   end
 
-  describe "GET index" do
-    it "assigns all users as @users" do
-      user = User.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:users).should eq([user])
-    end
-  end
-
-  describe "GET show" do
-    it "assigns the requested user as @user" do
-      user = User.create! valid_attributes
-      get :show, {:id => user.to_param}, valid_session
-      assigns(:user).should eq(user)
-    end
-  end
-
-
   describe "GET edit" do
     it "assigns the requested user as @user" do
       user = User.create! valid_attributes
-      get :edit, {:id => user.to_param}, valid_session
       assigns(:user).should eq(user)
+      get :edit, {:id => user.to_param}, valid_session
     end
   end
 
@@ -148,7 +131,8 @@ describe UsersController do
 
     describe "with invalid params" do
       it "assigns the user as @user" do
-        user = User.create! valid_attributes
+        user = User.new valid_attributes
+        user.save
         # Trigger the behavior that occurs when invalid params are submitted
         User.any_instance.stub(:save).and_return(false)
         put :update, {:id => user.to_param, :user => {}}, valid_session
