@@ -62,13 +62,14 @@ describe UsersController do
   describe "GET edit" do
     it "assigns the requested user as @user" do
       user = User.create! valid_attributes
-      valid_session[:user_id] = user.id
-      assigns(:user).should eq(user)
+      valid_session = {:user_id => user.id}
       get :edit, {:id => user.to_param}, valid_session
+      assigns(:user).should eq(user)
     end
   end
 
   describe "POST create" do
+
     describe "with valid params" do
       it "creates a new User" do
         expect {
@@ -113,41 +114,44 @@ describe UsersController do
         # specifies that the User created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        valid_session[:user_id] = user.id
+        valid_session = {:user_id => user.id}
         User.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
         put :update, {:id => user.to_param, :user => {'these' => 'params'}}, valid_session
       end
 
       it "assigns the requested user as @user" do
         user = User.create! valid_attributes
-        valid_session[:user_id] = user.id
-        assigns(:user).should eq(user)
+        valid_session = {:user_id => user.id}
+        
         put :update, {:id => user.to_param, :user => valid_attributes}, valid_session
+        assigns(:user).should eq(user)
       end
 
       it "redirects to the user" do
         user = User.create! valid_attributes
-      valid_session[:user_id] = user.id
-        response.should redirect_to(user)
+        valid_session = {:user_id => user.id}
         put :update, {:id => user.to_param, :user => valid_attributes}, valid_session
+        response.should redirect_to(user)
       end
     end
 
     describe "with invalid params" do
       it "assigns the user as @user" do
         user = User.create! valid_attributes
+        valid_session = {:user_id => user.id}
         # Trigger the behavior that occurs when invalid params are submitted
         User.any_instance.stub(:save).and_return(false)
-        assigns(:user).should eq(user)
         put :update, {:id => user.to_param, :user => {}}, valid_session
+        assigns(:user).should eq(user)
       end
 
       it "re-renders the 'edit' template" do
         user = User.create! valid_attributes
+        valid_session = {:user_id => user.id}
         # Trigger the behavior that occurs when invalid params are submitted
         User.any_instance.stub(:save).and_return(false)
-        response.should render_template("edit")
         put :update, {:id => user.to_param, :user => {}}, valid_session
+        response.should render_template("edit")
       end
     end
   end
@@ -155,7 +159,7 @@ describe UsersController do
   describe "DELETE destroy" do
     it "destroys the requested user" do
       user = User.create! valid_attributes
-      valid_session[:user_id] = user.id
+      valid_session = {:user_id => user.id}
       expect {
         delete :destroy, {:id => user.to_param}, valid_session
       }.to change(User, :count).by(-1)
@@ -163,9 +167,9 @@ describe UsersController do
 
     it "redirects to the users list" do
       user = User.create! valid_attributes
-      valid_session[:user_id] = user.id
-      response.should redirect_to(users_url)
+      valid_session = {:user_id => user.id}
       delete :destroy, {:id => user.to_param}, valid_session
+      response.should redirect_to(users_url)
     end
   end
 
