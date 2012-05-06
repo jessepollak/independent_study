@@ -24,19 +24,35 @@ describe RequestsController do
   # Request. As you add validations to Request, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    {:title => "Bicycle", :date => (DateTime.now+5), :description => "Give me your bike!"}
   end
   
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # RequestsController. Be sure to keep this updated too.
   def valid_session
-    {}
+    {user_id: @current_user.id}
+  end
+
+  before(:all) do
+    user = User.new_user_from_hash({
+    :provider => 'facebook',
+    :uid => '12345',
+    :info => {
+        :nickname => 'fooman',
+        :email => 'test@example.com',
+        :name => 'Foo Bar',
+        :first_name => 'Foo',
+        :last_name => 'Bar',
+        :image => "www.testimage.com/image"
+    }})
+    user.save
+    @current_user = user
   end
 
   describe "GET index" do
     it "assigns all requests as @requests" do
-      request = Request.create! valid_attributes
+      request = @current_user.requests.create valid_attributes
       get :index, {}, valid_session
       assigns(:requests).should eq([request])
     end
@@ -44,7 +60,7 @@ describe RequestsController do
 
   describe "GET show" do
     it "assigns the requested request as @request" do
-      request = Request.create! valid_attributes
+      request = @current_user.requests.create valid_attributes
       get :show, {:id => request.to_param}, valid_session
       assigns(:request).should eq(request)
     end
@@ -59,7 +75,7 @@ describe RequestsController do
 
   describe "GET edit" do
     it "assigns the requested request as @request" do
-      request = Request.create! valid_attributes
+      request = @current_user.requests.create valid_attributes
       get :edit, {:id => request.to_param}, valid_session
       assigns(:request).should eq(request)
     end
@@ -105,7 +121,7 @@ describe RequestsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested request" do
-        request = Request.create! valid_attributes
+        request = @current_user.requests.create valid_attributes
         # Assuming there are no other requests in the database, this
         # specifies that the Request created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -115,13 +131,13 @@ describe RequestsController do
       end
 
       it "assigns the requested request as @request" do
-        request = Request.create! valid_attributes
+        request = @current_user.requests.create valid_attributes
         put :update, {:id => request.to_param, :request => valid_attributes}, valid_session
         assigns(:request).should eq(request)
       end
 
       it "redirects to the request" do
-        request = Request.create! valid_attributes
+        request = @current_user.requests.create valid_attributes
         put :update, {:id => request.to_param, :request => valid_attributes}, valid_session
         response.should redirect_to(request)
       end
@@ -129,7 +145,7 @@ describe RequestsController do
 
     describe "with invalid params" do
       it "assigns the request as @request" do
-        request = Request.create! valid_attributes
+        request = @current_user.requests.create valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Request.any_instance.stub(:save).and_return(false)
         put :update, {:id => request.to_param, :request => {}}, valid_session
@@ -137,7 +153,7 @@ describe RequestsController do
       end
 
       it "re-renders the 'edit' template" do
-        request = Request.create! valid_attributes
+        request = @current_user.requests.create valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Request.any_instance.stub(:save).and_return(false)
         put :update, {:id => request.to_param, :request => {}}, valid_session
@@ -148,14 +164,14 @@ describe RequestsController do
 
   describe "DELETE destroy" do
     it "destroys the requested request" do
-      request = Request.create! valid_attributes
+      request = @current_user.requests.create valid_attributes
       expect {
         delete :destroy, {:id => request.to_param}, valid_session
       }.to change(Request, :count).by(-1)
     end
 
     it "redirects to the requests list" do
-      request = Request.create! valid_attributes
+      request = @current_user.requests.create valid_attributes
       delete :destroy, {:id => request.to_param}, valid_session
       response.should redirect_to(requests_url)
     end
