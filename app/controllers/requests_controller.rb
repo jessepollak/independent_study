@@ -1,6 +1,7 @@
 class RequestsController < ApplicationController
 
   before_filter :signed_in_check, only: [:new]
+  before_filter :owner_check, only: [:update]
   # GET /requests
   # GET /requests.json
   def index
@@ -62,7 +63,6 @@ class RequestsController < ApplicationController
   # PUT /requests/1.json
   def update
     @request = Request.find(params[:id])
-    owner_check(request)
     respond_to do |format|
       if @request.update_attributes(params[:request])
         format.html { redirect_to @request, notice: 'Request was successfully updated.' }
@@ -106,10 +106,8 @@ class RequestsController < ApplicationController
 
     helper_method :signed_in_check, :owner_check
 
-    def owner_check(request)
-      unless @current_user.requests.member? request
-        redirect_to root_url
-      end
+    def owner_check
+      redirect_to root_url unless @current_user.requests.collect {|x| x.id}.member? params[:id].to_i
     end
 
     def signed_in_check
